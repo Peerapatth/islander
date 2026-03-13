@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-gray-50 text-gray-900">
     <Navbar />
-    <main class="p-6">
+    <main>
       <router-view />
     </main>
   </div>

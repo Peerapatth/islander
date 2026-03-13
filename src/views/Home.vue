@@ -1,12 +1,12 @@
 <template>
-  <section>
-    <h1 class="text-3xl font-bold mb-4">{{ t('message.welcome') }}</h1>
-    <p class="text-gray-600">{{ t('message.home') }}</p>
+  <section :style="{ maxHeight: 'calc(100vh - var(--header-height))' }" class="flex flex-col overflow-hidden bg-black">
+    <HomeCarousel />
   </section>
 </template>
 
 <script setup>
-import { useI18n } from 'vue-i18n'
+import HomeCarousel from "@/components/HomeCarousel.vue";
+import { useI18n } from "vue-i18n";
 
-const { t } = useI18n()
+const { t } = useI18n();
 </script>

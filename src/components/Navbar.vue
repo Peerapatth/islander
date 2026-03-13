@@ -1,5 +1,5 @@
 <template>
-  <nav class="p-4 bg-white shadow flex items-center justify-between">
+  <nav ref="nav" class="p-4 bg-white shadow flex items-center justify-between">
     <div>
       <router-link to="/" class="mr-4 font-medium">{{
         t("message.home")
@@ -17,6 +17,7 @@
 </template>
 
 <script setup>
+import { ref, onMounted, onUnmounted, nextTick } from "vue";
 import { useI18n } from "vue-i18n";
 
 const { t, locale } = useI18n();
@@ -27,6 +28,25 @@ function toggleLang() {
     localStorage.setItem("locale", locale.value);
   } catch (e) {}
 }
+
+
+const nav = ref(null);
+
+function setHeaderHeight() {
+  try {
+    const h = nav.value ? nav.value.offsetHeight : 0;
+    document.documentElement.style.setProperty("--header-height", `${h}px`);
+  } catch (e) {}
+}
+
+onMounted(() => {
+  nextTick(setHeaderHeight);
+  window.addEventListener("resize", setHeaderHeight);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", setHeaderHeight);
+});
 </script>
 
 <style lang="scss" scoped></style>
